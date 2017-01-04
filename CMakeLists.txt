@@ -5,6 +5,11 @@ include(ExternalProject)
 option(BUILD_DemoBRIEF  "Build demo application with BRIEF features" OFF)
 option(BUILD_DemoSURF   "Build demo application with SURF features"  OFF)
 
+####### OUTPUT DIR #######
+SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
@@ -43,7 +48,7 @@ macro(GetDependency name other_dependency)
     if(${DOWNLOAD_${name}_dependency})
       ExternalProject_Add(${name}
         PREFIX ${DEPENDENCY_DIR}
-        GIT_REPOSITORY http://github.com/dorian3d/${name}
+        GIT_REPOSITORY http://github.com/jpablomch/${name}
         GIT_TAG v1.1-nonfree
         INSTALL_DIR ${DEPENDENCY_INSTALL_DIR}
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
